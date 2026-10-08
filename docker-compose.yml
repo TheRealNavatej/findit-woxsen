@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  findit-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: findit-woxsen-platform
+    ports:
+      - "5001:5001"
+    environment:
+      - NODE_ENV=production
+      - PORT=5001
+      - JWT_SECRET=woxsen_findit_secret_key_2026_production
+      # Uncomment if connecting to external MongoDB Atlas or the local container below:
+      # - MONGODB_URI=mongodb://mongo:27017/findit_woxsen
+    restart: unless-stopped
+
+  # Optional local MongoDB service (uncomment if you want a dedicated local database):
+  # mongo:
+  #   image: mongo:7-jammy
+  #   container_name: findit-woxsen-db
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo-data:/data/db
+  #   restart: unless-stopped
+
+# volumes:
+#   mongo-data:
